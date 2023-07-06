@@ -1,0 +1,8 @@
+/*.txt
+/log/
+/__pycache__/
+/common/__pycache__/
+/learn/__pycache__/
+/learn/common/
+/data_analyze/__pycache__/
+/data_analyze/common/
