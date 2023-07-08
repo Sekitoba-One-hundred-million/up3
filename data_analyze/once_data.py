@@ -451,6 +451,7 @@ class OnceData:
 
         first_up3_halon_ave_stand = lib.standardization( current_race_data[data_name.first_up3_halon_ave] )
         first_up3_halon_min_stand = lib.standardization( current_race_data[data_name.first_up3_halon_min] )
+        std_race_ave_horce_body = stdev( current_race_data[data_name.past_ave_horce_body] )
 
         min_corner = int( min_corner_key )
         min_race_horce_true_skill = min( current_race_data[data_name.horce_true_skill] )
@@ -786,6 +787,7 @@ class OnceData:
             t_instance[data_name.place] = place_num
             t_instance[data_name.speed_index] = speed_index
             t_instance[data_name.speed_index_index] = speed_index_index
+            t_instance[data_name.std_race_ave_horce_body] = std_race_ave_horce_body
             t_instance[data_name.two_popular_limb] = two_popular_limb
             t_instance[data_name.two_popular_odds] = two_popular_odds
             t_instance[data_name.up3_standard_value] = up3_standard_value

@@ -95,6 +95,7 @@ past_std_horce_body
 place
 speed_index
 speed_index_index
+std_race_ave_horce_body
 trainer_rank
 two_popular_limb
 two_popular_odds

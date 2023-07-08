@@ -58,7 +58,7 @@ def score_check( simu_data, model, upload = False ):
         all_horce_num = len( simu_data[race_id] )
         
         for horce_id in simu_data[race_id].keys():
-            predict_score = predict_data[c] + BASE
+            predict_score = round( predict_data[c] + BASE, 1 )
             answer_up3 = simu_data[race_id][horce_id]["answer"]["up3"]
             check_data.append( { "horce_id": horce_id, "answer": answer_up3, "score": predict_score } )
             score_list.append( predict_score )
