@@ -95,7 +95,6 @@ past_std_horce_body
 place
 speed_index
 speed_index_index
-std_race_ave_horce_body
 trainer_rank
 two_popular_limb
 two_popular_odds
@@ -149,17 +148,6 @@ stand_jockey_judgment_dist
 stand_jockey_judgment_kind
 stand_jockey_judgment_baba
 stand_jockey_judgment_place
-std_race_horce_true_skill
-std_race_jockey_true_skill
-std_race_trainer_true_skill
-std_race_horce_first_passing_true_skill
-std_race_jockey_first_passing_true_skill
-std_race_trainer_first_passing_true_skill
-std_speed_index
-std_up_rate
-std_past_ave_horce_body
-std_past_max_horce_body
-std_past_min_horce_body
 min_race_horce_true_skill
 min_race_jockey_true_skill
 min_race_trainer_true_skill

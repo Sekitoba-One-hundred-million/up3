@@ -451,18 +451,6 @@ class OnceData:
 
         first_up3_halon_ave_stand = lib.standardization( current_race_data[data_name.first_up3_halon_ave] )
         first_up3_halon_min_stand = lib.standardization( current_race_data[data_name.first_up3_halon_min] )
-        std_race_ave_horce_body = stdev( current_race_data[data_name.past_ave_horce_body] )
-        std_race_horce_true_skill = stdev( current_race_data[data_name.horce_true_skill] )
-        std_race_jockey_true_skill = stdev( current_race_data[data_name.jockey_true_skill] )
-        std_race_trainer_true_skill = stdev( current_race_data[data_name.trainer_true_skill] )
-        std_race_horce_first_passing_true_skill = stdev( current_race_data[data_name.horce_first_passing_true_skill] )
-        std_race_jockey_first_passing_true_skill = stdev( current_race_data[data_name.jockey_first_passing_true_skill] )
-        std_race_trainer_first_passing_true_skill = stdev( current_race_data[data_name.trainer_first_passing_true_skill] )        
-        std_speed_index = stdev( current_race_data[data_name.speed_index] )
-        std_up_rate = stdev( current_race_data[data_name.up_rate] )
-        std_past_ave_horce_body = stdev( current_race_data[data_name.past_ave_horce_body] )
-        std_past_max_horce_body = stdev( current_race_data[data_name.past_max_horce_body] )
-        std_past_min_horce_body = stdev( current_race_data[data_name.past_min_horce_body] )
 
         min_corner = int( min_corner_key )
         min_race_horce_true_skill = min( current_race_data[data_name.horce_true_skill] )
@@ -798,7 +786,6 @@ class OnceData:
             t_instance[data_name.place] = place_num
             t_instance[data_name.speed_index] = speed_index
             t_instance[data_name.speed_index_index] = speed_index_index
-            t_instance[data_name.std_race_ave_horce_body] = std_race_ave_horce_body
             t_instance[data_name.two_popular_limb] = two_popular_limb
             t_instance[data_name.two_popular_odds] = two_popular_odds
             t_instance[data_name.up3_standard_value] = up3_standard_value
@@ -861,17 +848,6 @@ class OnceData:
             t_instance[data_name.stand_jockey_judgment_baba] = stand_jockey_judgment_baba[count]
             t_instance[data_name.stand_jockey_judgment_place] = stand_jockey_judgment_place[count]
             
-            t_instance[data_name.std_race_horce_true_skill] = std_race_horce_true_skill
-            t_instance[data_name.std_race_jockey_true_skill] = std_race_jockey_true_skill
-            t_instance[data_name.std_race_trainer_true_skill] = std_race_trainer_true_skill
-            t_instance[data_name.std_race_horce_first_passing_true_skill] = std_race_horce_first_passing_true_skill
-            t_instance[data_name.std_race_jockey_first_passing_true_skill] = std_race_jockey_first_passing_true_skill
-            t_instance[data_name.std_race_trainer_first_passing_true_skill] = std_race_trainer_first_passing_true_skill
-            t_instance[data_name.std_speed_index] = std_speed_index
-            t_instance[data_name.std_up_rate] = std_up_rate
-            t_instance[data_name.std_past_ave_horce_body] = std_past_ave_horce_body
-            t_instance[data_name.std_past_max_horce_body] = std_past_max_horce_body
-            t_instance[data_name.std_past_min_horce_body] = std_past_min_horce_body
             t_instance[data_name.three_average] = three_average
             t_instance[data_name.three_difference] = three_difference
             t_instance[data_name.one_rate] = one_rate
