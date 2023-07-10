@@ -4,8 +4,6 @@ import numpy as np
 import sekitoba_library as lib
 import sekitoba_data_manage as dm
 
-BASE = 35
-
 def data_check( data ):
     result = {}
     result["teacher"] = []
@@ -26,7 +24,7 @@ def data_check( data ):
 
         for r in range( 0, query ):
             current_data = data["teacher"][i][r]
-            current_answer = float( data["answer"][i][r] ) - BASE
+            current_answer = data["answer"][i][r]
 
             if year in lib.test_years:
                 result["test_teacher"].append( current_data )
@@ -58,7 +56,8 @@ def score_check( simu_data, model, upload = False ):
         all_horce_num = len( simu_data[race_id] )
         
         for horce_id in simu_data[race_id].keys():
-            predict_score = round( predict_data[c] + BASE, 1 )
+            predict_lag = predict_data[c]
+            predict_score = ( 1 + predict_lag ) * simu_data[race_id][horce_id]["answer"]["ave_up3"]
             answer_up3 = simu_data[race_id][horce_id]["answer"]["up3"]
             check_data.append( { "horce_id": horce_id, "answer": answer_up3, "score": predict_score } )
             score_list.append( predict_score )

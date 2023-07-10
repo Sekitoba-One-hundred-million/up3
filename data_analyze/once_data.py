@@ -49,6 +49,7 @@ dm.dl.file_set( "first_up3_halon.pickle" )
 dm.dl.file_set( "up3_true_skill_data.pickle" )
 dm.dl.file_set( "predict_first_passing_rank.pickle" )
 dm.dl.file_set( "predict_last_passing_rank.pickle" )
+dm.dl.file_set( "up3_ave_data.pickle" )
 
 class OnceData:
     def __init__( self ):
@@ -78,6 +79,7 @@ class OnceData:
         self.first_up3_halon = dm.dl.data_get( "first_up3_halon.pickle" )
         self.predict_first_passing_rank = dm.dl.data_get( "predict_first_passing_rank.pickle" )
         self.predict_last_passing_rank = dm.dl.data_get( "predict_last_passing_rank.pickle" )
+        self.up3_ave_data = dm.dl.data_get( "up3_ave_data.pickle" )
         
         self.race_high_level = RaceHighLevel()
         self.race_type = RaceType()
@@ -703,6 +705,15 @@ class OnceData:
                     
                 judgement_data["trainer_judgment_up3_{}".format( param )] = trainer_judgment
 
+            key_dist_kind = str( int( cd.dist_kind() ) )
+
+            ave_up3 = 36
+            
+            try:
+                ave_up3 = self.up3_ave_data[key_place][key_kind][key_dist_kind]
+            except:
+                pass
+
             t_instance = {}
             t_instance[data_name.age] = age
             t_instance[data_name.all_horce_num] = cd.all_horce_num()
@@ -758,13 +769,13 @@ class OnceData:
             t_instance[data_name.jockey_last_passing_true_skill] = jockey_last_passing_true_skill
             t_instance[data_name.jockey_last_passing_true_skill_index] = jockey_last_passing_true_skill_index
             
-            t_instance[data_name.jockey_judgment_up3_limb] = judgement_data[data_name.jockey_judgment_up3_limb]
-            t_instance[data_name.jockey_judgment_up3_popular] = judgement_data[data_name.jockey_judgment_up3_popular]
-            t_instance[data_name.jockey_judgment_up3_flame_num] = judgement_data[data_name.jockey_judgment_up3_flame_num]
-            t_instance[data_name.jockey_judgment_up3_dist] = judgement_data[data_name.jockey_judgment_up3_dist]
-            t_instance[data_name.jockey_judgment_up3_kind] = judgement_data[data_name.jockey_judgment_up3_kind]
-            t_instance[data_name.jockey_judgment_up3_baba] = judgement_data[data_name.jockey_judgment_up3_baba]
-            t_instance[data_name.jockey_judgment_up3_place] = judgement_data[data_name.jockey_judgment_up3_place]            
+            t_instance[data_name.jockey_judgment_up3_limb] = judgement_data[data_name.jockey_judgment_up3_limb] / ave_up3 - 1
+            t_instance[data_name.jockey_judgment_up3_popular] = judgement_data[data_name.jockey_judgment_up3_popular] / ave_up3 - 1
+            t_instance[data_name.jockey_judgment_up3_flame_num] = judgement_data[data_name.jockey_judgment_up3_flame_num] / ave_up3 - 1
+            t_instance[data_name.jockey_judgment_up3_dist] = judgement_data[data_name.jockey_judgment_up3_dist] / ave_up3 - 1
+            t_instance[data_name.jockey_judgment_up3_kind] = judgement_data[data_name.jockey_judgment_up3_kind] / ave_up3 - 1
+            t_instance[data_name.jockey_judgment_up3_baba] = judgement_data[data_name.jockey_judgment_up3_baba] / ave_up3 - 1
+            t_instance[data_name.jockey_judgment_up3_place] = judgement_data[data_name.jockey_judgment_up3_place] / ave_up3 - 1
             t_instance[data_name.jockey_judgment_up3_limb_index] = sort_race_data[data_name.jockey_judgment_up3_limb_index].index( judgement_data[data_name.jockey_judgment_up3_limb] )
             t_instance[data_name.jockey_judgment_up3_popular_index] = sort_race_data[data_name.jockey_judgment_up3_popular_index].index( judgement_data[data_name.jockey_judgment_up3_popular] )
             t_instance[data_name.jockey_judgment_up3_flame_num_index] = sort_race_data[data_name.jockey_judgment_up3_flame_num_index].index( judgement_data[data_name.jockey_judgment_up3_flame_num] )
@@ -780,17 +791,17 @@ class OnceData:
             t_instance[data_name.jockey_judgment_up3_baba_stand] = jockey_judgment_up3_baba_stand[count]
             t_instance[data_name.jockey_judgment_up3_place_stand] = jockey_judgment_up3_place_stand[count]
             
-            t_instance[data_name.trainer_judgment_up3_limb] = judgement_data[data_name.trainer_judgment_up3_limb]
-            t_instance[data_name.trainer_judgment_up3_popular] = judgement_data[data_name.trainer_judgment_up3_popular]
-            t_instance[data_name.trainer_judgment_up3_flame_num] = judgement_data[data_name.trainer_judgment_up3_flame_num]
-            t_instance[data_name.trainer_judgment_up3_dist] = judgement_data[data_name.trainer_judgment_up3_dist]
-            t_instance[data_name.trainer_judgment_up3_kind] = judgement_data[data_name.trainer_judgment_up3_kind]
-            t_instance[data_name.trainer_judgment_up3_baba] = judgement_data[data_name.trainer_judgment_up3_baba]
-            t_instance[data_name.trainer_judgment_up3_place] = judgement_data[data_name.trainer_judgment_up3_place]
+            t_instance[data_name.trainer_judgment_up3_limb] = judgement_data[data_name.trainer_judgment_up3_limb] / ave_up3 - 1
+            t_instance[data_name.trainer_judgment_up3_popular] = judgement_data[data_name.trainer_judgment_up3_popular] / ave_up3 - 1
+            t_instance[data_name.trainer_judgment_up3_flame_num] = judgement_data[data_name.trainer_judgment_up3_flame_num] / ave_up3 - 1
+            t_instance[data_name.trainer_judgment_up3_dist] = judgement_data[data_name.trainer_judgment_up3_dist] / ave_up3 - 1
+            t_instance[data_name.trainer_judgment_up3_kind] = judgement_data[data_name.trainer_judgment_up3_kind] / ave_up3 - 1
+            t_instance[data_name.trainer_judgment_up3_baba] = judgement_data[data_name.trainer_judgment_up3_baba] / ave_up3 - 1
+            t_instance[data_name.trainer_judgment_up3_place] = judgement_data[data_name.trainer_judgment_up3_place] / ave_up3 - 1
 
             t_instance[data_name.limb] = limb_math
-            t_instance[data_name.min_up3] = pd.min_up3()
-            t_instance[data_name.match_up3] = match_up3
+            t_instance[data_name.min_up3] = pd.min_up3() / ave_up3 - 1
+            t_instance[data_name.match_up3] = match_up3 / ave_up3 - 1
             t_instance[data_name.match_up3_index] = match_up3_index
             t_instance[data_name.match_up3_stand] = match_up3_stand[count]
             t_instance[data_name.my_limb_count] = my_limb_count_score
@@ -902,12 +913,14 @@ class OnceData:
             self.simu_data[race_id][horce_id] = {}
             self.simu_data[race_id][horce_id]["data"] = t_list
             self.simu_data[race_id][horce_id]["answer"] = { "up3": up3_time,
+                                                           "ave_up3": ave_up3,
                                                            "odds": cd.odds(),
                                                            "popular": cd.popular(),
                                                            "horce_num": cd.horce_number() }
 
+            up3_lag = ( up3_time / ave_up3 ) - 1
             answer_horce_body.append( answer_corner_horce_body )
-            answer_data.append( up3_time )
+            answer_data.append( up3_lag )
             teacher_data.append( t_list )
             #diff_data.append( cd.diff() )
 
