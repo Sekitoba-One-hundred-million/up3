@@ -64,12 +64,13 @@ def score_check( simu_data, model, upload = False ):
             c += 1
 
         stand_score_list = lib.standardization( score_list )
+        sort_score_list = sorted( score_list )
         check_data = sorted( check_data, key = lambda x: x["score"] )
         
         for i in range( 0, len( check_data ) ):
             predict_score = check_data[i]["score"]
             simu_predict_data[race_id][check_data[i]["horce_id"]] = {}
-            simu_predict_data[race_id][check_data[i]["horce_id"]]["index"] = score_list.index( predict_score )
+            simu_predict_data[race_id][check_data[i]["horce_id"]]["index"] = sort_score_list.index( predict_score )
             simu_predict_data[race_id][check_data[i]["horce_id"]]["score"] = predict_score
             simu_predict_data[race_id][check_data[i]["horce_id"]]["stand"] = stand_score_list[i]
 
