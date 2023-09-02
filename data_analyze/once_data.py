@@ -9,15 +9,12 @@ import sekitoba_library as lib
 import sekitoba_data_manage as dm
 
 from sekitoba_data_create.time_index_get import TimeIndexGet
-#from sekitoba_data_create.up_score import UpScore
 from sekitoba_data_create.train_index_get import TrainIndexGet
-#from sekitoba_data_create.pace_time_score import PaceTimeScore
 from sekitoba_data_create.jockey_data_get import JockeyData
 from sekitoba_data_create.trainer_data_get import TrainerData
 from sekitoba_data_create.high_level_data_get import RaceHighLevel
 from sekitoba_data_create.race_type import RaceType
 from sekitoba_data_create.before_data import BeforeData
-#from sekitoba_data_create import parent_data_get
 
 from common.name import Name
 
@@ -38,7 +35,6 @@ dm.dl.file_set( "race_money_data.pickle" )
 dm.dl.file_set( "waku_three_rate_data.pickle" )
 dm.dl.file_set( "wrap_data.pickle" )
 dm.dl.file_set( "corner_horce_body.pickle" )
-dm.dl.file_set( "omega_index_data.pickle" )
 dm.dl.file_set( "jockey_judgment_up3_data.pickle" )
 dm.dl.file_set( "jockey_judgment_up3_rate_data.pickle" )
 dm.dl.file_set( "trainer_judgment_up3_data.pickle" )
@@ -57,7 +53,6 @@ class OnceData:
         self.horce_data = dm.dl.data_get( "horce_data_storage.pickle" )
         self.baba_index_data = dm.dl.data_get( "baba_index_data.pickle" )
         self.parent_id_data = dm.dl.data_get( "parent_id_data.pickle" )
-        self.omega_index_data = dm.dl.data_get( "omega_index_data.pickle" )
         self.race_day = dm.dl.data_get( "race_day.pickle" )
         self.parent_id_data = dm.dl.data_get( "parent_id_data.pickle" )
         self.horce_sex_data = dm.dl.data_get( "horce_sex_data.pickle" )
@@ -191,13 +186,11 @@ class OnceData:
         current_race_data[data_name.up3_horce_true_skill] = []
         current_race_data[data_name.up3_jockey_true_skill] = []
         current_race_data[data_name.up3_trainer_true_skill] = []
-        current_race_data[data_name.corner_true_skill] = []
         current_race_data[data_name.corner_diff_rank_ave] = []
         current_race_data[data_name.speed_index] = []
         current_race_data[data_name.match_up3] = []
         current_race_data[data_name.up_rate] = []
         current_race_data[data_name.my_limb_count] = { "-1": -1 }
-        current_race_data[data_name.omega] = []
         current_race_data[data_name.burden_weight] = []
         current_race_data[data_name.age] = []
         current_race_data[data_name.level_score] = []
@@ -314,11 +307,6 @@ class OnceData:
               trainer_id in self.up3_true_skill_data["trainer"][race_id]:
                 up3_trainer_true_skill = self.up3_true_skill_data["trainer"][race_id][trainer_id]
 
-            try:
-                omega = self.omega_index_data[race_id][int(cd.horce_number()-1)]
-            except:
-                omega = 0
-
             past_min_horce_body = 1000
             past_max_horce_body = 1000
             past_ave_horce_body = 1000
@@ -407,7 +395,6 @@ class OnceData:
             current_race_data[data_name.past_max_horce_body].append( past_max_horce_body )
             current_race_data[data_name.past_ave_horce_body].append( past_ave_horce_body )
             current_race_data[data_name.past_std_horce_body].append( past_std_horce_body )
-            current_race_data[data_name.omega].append( omega )
             current_race_data[data_name.predict_train_score].append( train_score )
             current_race_data[data_name.first_up3_halon_ave].append( first_up3_halon_ave )
             current_race_data[data_name.first_up3_halon_min].append( first_up3_halon_min )
@@ -439,7 +426,6 @@ class OnceData:
         sort_race_data[data_name.up_rate_index] = sorted( current_race_data[data_name.up_rate], reverse = True )
         sort_race_data[data_name.past_ave_horce_body_index] = sorted( current_race_data[data_name.past_ave_horce_body], reverse = True )
         sort_race_data[data_name.past_min_horce_body_index] = sorted( current_race_data[data_name.past_min_horce_body], reverse = True )
-        sort_race_data[data_name.omega_index] = sorted( current_race_data[data_name.omega], reverse = True )        
         sort_race_data[data_name.predict_train_score_index] = sorted( current_race_data[data_name.predict_train_score], reverse = True )
         
         N = len( current_race_data[data_name.horce_true_skill] )
@@ -590,7 +576,6 @@ class OnceData:
             horce_last_passing_true_skill = current_race_data[data_name.horce_last_passing_true_skill][count]
             jockey_last_passing_true_skill = current_race_data[data_name.jockey_last_passing_true_skill][count]
 
-            omega = current_race_data[data_name.omega][count]
             predict_train_score = current_race_data[data_name.predict_train_score][count]
 
             corner_diff_rank_ave = current_race_data[data_name.corner_diff_rank_ave][count]
@@ -612,7 +597,6 @@ class OnceData:
             trainer_first_passing_true_skill_index = sort_race_data[data_name.trainer_first_passing_true_skill_index].index( trainer_first_passing_true_skill )
             horce_last_passing_true_skill_index = sort_race_data[data_name.horce_last_passing_true_skill_index].index( horce_last_passing_true_skill )
             jockey_last_passing_true_skill_index = sort_race_data[data_name.jockey_last_passing_true_skill_index].index( jockey_last_passing_true_skill )
-            omega_index = sort_race_data[data_name.omega_index].index( omega )
             predict_train_score_index = sort_race_data[data_name.predict_train_score_index].index( predict_train_score )
             
             corner_diff_rank_ave_index = sort_race_data[data_name.corner_diff_rank_ave_index].index( corner_diff_rank_ave )
@@ -895,8 +879,6 @@ class OnceData:
             t_instance[data_name.jockey_rank] = jockey_rank_score
             t_instance[data_name.jockey_year_rank] = jockey_year_rank_score
             t_instance[data_name.trainer_rank] = trainer_rank_score
-            t_instance[data_name.omega] = omega
-            t_instance[data_name.omega_index] = omega_index
             t_instance[data_name.money] = money_score
             t_instance[data_name.popular_rank] = popular_rank
             t_instance[data_name.before_speed] = before_speed_score
