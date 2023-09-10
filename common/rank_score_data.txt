@@ -153,7 +153,8 @@ predict_train_score_stand
 speed_index
 speed_index_index
 speed_index_stand
-std_race_ave_horce_body
+std_past_ave_horce_body
+std_past_ave_horce_body
 three_average
 three_difference
 three_rate
