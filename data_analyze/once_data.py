@@ -625,8 +625,8 @@ class OnceData:
             past_max_last_horce_body = current_race_data[data_name.past_max_last_horce_body][count]
             past_ave_first_horce_body = current_race_data[data_name.past_ave_first_horce_body][count]
             past_ave_last_horce_body = current_race_data[data_name.past_ave_last_horce_body][count]
-            past_std_first_horce_body = current_race_data[data_name.past_std_last_horce_body][count]
-            past_std_last_horce_body = current_race_data[data_name.past_std_first_horce_body][count]
+            past_std_first_horce_body = current_race_data[data_name.past_std_first_horce_body][count]
+            past_std_last_horce_body = current_race_data[data_name.past_std_last_horce_body][count]
             
             horce_true_skill_index = sort_race_data[data_name.horce_true_skill_index].index( horce_true_skill )
             jockey_true_skill_index = sort_race_data[data_name.jockey_true_skill_index].index( jockey_true_skill )
@@ -872,10 +872,10 @@ class OnceData:
             t_instance[data_name.ave_up_rate] = ave_up_rate - up_rate
             t_instance[data_name.ave_past_ave_first_horce_body] = ave_past_ave_first_horce_body - past_ave_first_horce_body
             t_instance[data_name.ave_past_ave_last_horce_body] = ave_past_ave_last_horce_body - past_ave_last_horce_body
-            t_instance[data_name.ave_past_max_first_horce_body] = ave_past_max_first_horce_body - past_min_first_horce_body
-            t_instance[data_name.ave_past_max_last_horce_body] = ave_past_max_last_horce_body - past_min_last_horce_body
-            t_instance[data_name.ave_past_min_first_horce_body] = ave_past_min_first_horce_body - past_max_first_horce_body
-            t_instance[data_name.ave_past_min_last_horce_body] = ave_past_min_last_horce_body - past_max_last_horce_body
+            t_instance[data_name.ave_past_max_first_horce_body] = ave_past_max_first_horce_body - past_max_first_horce_body
+            t_instance[data_name.ave_past_max_last_horce_body] = ave_past_max_last_horce_body - past_max_last_horce_body
+            t_instance[data_name.ave_past_min_first_horce_body] = ave_past_min_first_horce_body - past_min_first_horce_body
+            t_instance[data_name.ave_past_min_last_horce_body] = ave_past_min_last_horce_body - past_min_last_horce_body
             t_instance[data_name.max_race_horce_true_skill] = max_race_horce_true_skill - horce_true_skill
             t_instance[data_name.max_race_jockey_true_skill] = max_race_jockey_true_skill - jockey_true_skill
             t_instance[data_name.max_race_trainer_true_skill] = max_race_trainer_true_skill - trainer_true_skill
@@ -884,12 +884,12 @@ class OnceData:
             t_instance[data_name.max_race_trainer_first_passing_true_skill] = max_race_trainer_first_passing_true_skill - trainer_first_passing_true_skill
             t_instance[data_name.max_speed_index] = max_speed_index - speed_index
             t_instance[data_name.max_up_rate] = max_up_rate - up_rate
-            t_instance[data_name.max_past_ave_first_horce_body] = max_past_ave_first_horce_body - past_ave_last_horce_body
+            t_instance[data_name.max_past_ave_first_horce_body] = max_past_ave_first_horce_body - past_ave_first_horce_body
             t_instance[data_name.max_past_ave_last_horce_body] = max_past_ave_last_horce_body - past_ave_last_horce_body
-            t_instance[data_name.max_past_max_first_horce_body] = max_past_max_first_horce_body - past_min_first_horce_body
+            t_instance[data_name.max_past_max_first_horce_body] = max_past_max_first_horce_body - past_max_first_horce_body
             t_instance[data_name.max_past_max_last_horce_body] = max_past_max_last_horce_body - past_min_last_horce_body
-            t_instance[data_name.max_past_min_first_horce_body] = max_past_min_first_horce_body - past_max_first_horce_body
-            t_instance[data_name.max_past_min_last_horce_body] = max_past_min_last_horce_body - past_max_last_horce_body
+            t_instance[data_name.max_past_min_first_horce_body] = max_past_min_first_horce_body - past_min_first_horce_body
+            t_instance[data_name.max_past_min_last_horce_body] = max_past_min_last_horce_body - past_min_last_horce_body
             t_instance[data_name.min_race_horce_true_skill] = min_race_horce_true_skill - horce_true_skill
             t_instance[data_name.min_race_jockey_true_skill] = min_race_jockey_true_skill - jockey_true_skill
             t_instance[data_name.min_race_trainer_true_skill] = min_race_trainer_true_skill - trainer_true_skill
@@ -900,10 +900,10 @@ class OnceData:
             t_instance[data_name.min_up_rate] = min_up_rate - up_rate
             t_instance[data_name.min_past_ave_first_horce_body] = min_past_ave_first_horce_body - past_ave_first_horce_body
             t_instance[data_name.min_past_ave_last_horce_body] = min_past_ave_last_horce_body - past_ave_last_horce_body
-            t_instance[data_name.min_past_max_first_horce_body] = min_past_max_first_horce_body - past_min_first_horce_body
-            t_instance[data_name.min_past_max_last_horce_body] = min_past_max_last_horce_body - past_min_last_horce_body
-            t_instance[data_name.min_past_min_first_horce_body] = min_past_min_first_horce_body - past_max_first_horce_body
-            t_instance[data_name.min_past_min_last_horce_body] = min_past_min_last_horce_body - past_max_last_horce_body
+            t_instance[data_name.min_past_max_first_horce_body] = min_past_max_first_horce_body - past_max_first_horce_body
+            t_instance[data_name.min_past_max_last_horce_body] = min_past_max_last_horce_body - past_max_last_horce_body
+            t_instance[data_name.min_past_min_first_horce_body] = min_past_min_first_horce_body - past_min_first_horce_body
+            t_instance[data_name.min_past_min_last_horce_body] = min_past_min_last_horce_body - past_min_last_horce_body
 
             t_instance[data_name.horce_true_skill_stand] = horce_true_skill_stand[count]
             t_instance[data_name.jockey_true_skill_stand] = jockey_true_skill_stand[count]
