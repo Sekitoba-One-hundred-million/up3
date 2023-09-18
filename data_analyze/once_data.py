@@ -887,7 +887,7 @@ class OnceData:
             t_instance[data_name.max_past_ave_first_horce_body] = max_past_ave_first_horce_body - past_ave_first_horce_body
             t_instance[data_name.max_past_ave_last_horce_body] = max_past_ave_last_horce_body - past_ave_last_horce_body
             t_instance[data_name.max_past_max_first_horce_body] = max_past_max_first_horce_body - past_max_first_horce_body
-            t_instance[data_name.max_past_max_last_horce_body] = max_past_max_last_horce_body - past_min_last_horce_body
+            t_instance[data_name.max_past_max_last_horce_body] = max_past_max_last_horce_body - past_max_last_horce_body
             t_instance[data_name.max_past_min_first_horce_body] = max_past_min_first_horce_body - past_min_first_horce_body
             t_instance[data_name.max_past_min_last_horce_body] = max_past_min_last_horce_body - past_min_last_horce_body
             t_instance[data_name.min_race_horce_true_skill] = min_race_horce_true_skill - horce_true_skill
