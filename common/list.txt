@@ -312,3 +312,10 @@ explosive_power_min
 explosive_power_max
 explosive_power_ave_index
 explosive_power_ave_stand
+condition_devi
+condition_devi_index
+condition_devi_stand
+condition_devi_devi
+predict_pace
+predict_netkeiba_pace
+predict_netkeiba_deployment

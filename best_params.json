@@ -1,1 +1,1 @@
-{"learning_rate": 0.012623184396868669, "num_leaves": 181, "max_depth": 347, "num_iteration": 12609, "min_data_in_leaf": 47, "lambda_l1": 0.0793417129269428, "lambda_l2": 0.09012475961865037}
+{"learning_rate": 0.010084411052863198, "num_leaves": 224, "max_depth": 321, "num_iteration": 9443, "min_data_in_leaf": 23, "lambda_l1": 0.024332603860854684, "lambda_l2": 0.029056861447214866}
