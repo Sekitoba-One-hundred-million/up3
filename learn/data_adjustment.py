@@ -17,26 +17,26 @@ def data_check( data ):
         year = data["year"][i]
         query = len( data["teacher"][i] )
 
-        if year in lib.test_years:
+        if lib.test_year_check( year ):
             result["test_query"].append( query )
-        else:
+        elif not year in lib.test_years:
             result["query"].append( query )
 
         for r in range( 0, query ):
             current_data = data["teacher"][i][r]
             current_answer = data["answer"][i][r]
 
-            if year in lib.test_years:
+            if lib.test_year_check( year ):
                 result["test_teacher"].append( current_data )
                 result["test_answer"].append( current_answer )
-            else:
+            elif not year in lib.test_years:
                 result["teacher"].append( current_data )
                 result["answer"].append( current_answer  )
 
     return result
 
-def score_check( simu_data, model, upload = False ):
-    score1 = 0
+def score_check( simu_data, model, score_years = lib.test_years, upload = False ):
+    score = 0
     count = 0
     simu_predict_data = {}
     predict_use_data = []
@@ -73,15 +73,15 @@ def score_check( simu_data, model, upload = False ):
             simu_predict_data[race_id][check_data[i]["horce_id"]]["score"] = predict_score
             simu_predict_data[race_id][check_data[i]["horce_id"]]["stand"] = stand_score_list[i]
 
-            if year in lib.test_years:
-                score1 += math.pow( predict_score - check_data[i]["answer"], 2 )
+            if year in score_years:
+                score += math.pow( predict_score - check_data[i]["answer"], 2 )
                 count += 1            
             
-    score1 /= count
-    score1 = math.sqrt( score1 )
-    print( "score1: {}".format( score1 ) )
+    score /= count
+    score = math.sqrt( score )
+    print( "score: {}".format( score ) )
 
     if upload:
         dm.pickle_upload( "predict_up3.pickle", simu_predict_data )
 
-    return score1
+    return score
