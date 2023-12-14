@@ -1,4 +1,3 @@
-age
 all_horce_num
 ave_burden_weight_diff
 ave_first_passing_rank

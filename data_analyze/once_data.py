@@ -531,7 +531,7 @@ class OnceData:
             if not before_cd == None:
                 before_speed_score = before_cd.speed()
                 before_diff_score = before_cd.diff()
-                before_id_weight_score = self.division( min( max( before_cd.id_weight(), -10 ), 10 ), 2 )
+                before_id_weight_score = before_cd.id_weight()
                 before_popular = before_cd.popular()
                 before_passing_list = before_cd.passing_rank().split( "-" )
                 before_rank = before_cd.rank()
@@ -607,7 +607,6 @@ class OnceData:
                         break
 
             t_instance = {}
-            t_instance[data_name.age] = age
             t_instance[data_name.all_horce_num] = cd.all_horce_num()
             t_instance[data_name.ave_burden_weight_diff] = \
               ave_burden_weight - current_race_data[data_name.burden_weight][count]
@@ -710,7 +709,7 @@ class OnceData:
             t_instance[data_name.three_average] = pd.three_average()
             t_instance[data_name.three_difference] = pd.three_difference()
             t_instance[data_name.one_rate] = pd.one_rate()
-            t_instance[data_name.two_rate] = pd.one_rate()
+            t_instance[data_name.two_rate] = pd.two_rate()
             t_instance[data_name.three_rate] = pd.three_rate()
             t_instance[data_name.match_rank] = pd.match_rank()
             t_instance[data_name.passing_regression] = pd.passing_regression()
