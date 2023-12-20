@@ -640,17 +640,17 @@ class OnceData:
             t_instance[data_name.weather] = cd.weather()
             t_instance[data_name.diff_load_weight] = diff_load_weight
             t_instance[data_name.popular] = cd.popular()
-            t_instance[data_name.ave_race_horce_true_skill] = \
+            t_instance[data_name.ave_horce_true_skill] = \
               ave_race_horce_true_skill - current_race_data[data_name.horce_true_skill][count]
-            t_instance[data_name.ave_race_jockey_true_skill] = \
+            t_instance[data_name.ave_jockey_true_skill] = \
               ave_race_jockey_true_skill - current_race_data[data_name.jockey_true_skill][count]
-            t_instance[data_name.ave_race_trainer_true_skill] = \
+            t_instance[data_name.ave_trainer_true_skill] = \
               ave_race_trainer_true_skill - current_race_data[data_name.trainer_true_skill][count]
-            t_instance[data_name.ave_race_horce_first_passing_true_skill] = \
+            t_instance[data_name.ave_horce_first_passing_true_skill] = \
               ave_race_horce_first_passing_true_skill - current_race_data[data_name.horce_first_passing_true_skill][count]
-            t_instance[data_name.ave_race_jockey_first_passing_true_skill] = \
+            t_instance[data_name.ave_jockey_first_passing_true_skill] = \
               ave_race_jockey_first_passing_true_skill - current_race_data[data_name.jockey_first_passing_true_skill][count]
-            t_instance[data_name.ave_race_trainer_first_passing_true_skill] = \
+            t_instance[data_name.ave_trainer_first_passing_true_skill] = \
               ave_race_trainer_first_passing_true_skill - current_race_data[data_name.trainer_first_passing_true_skill][count]
             t_instance[data_name.ave_speed_index] = ave_speed_index - current_race_data[data_name.speed_index][count]
             t_instance[data_name.ave_up_rate] = ave_up_rate - current_race_data[data_name.up_rate][count]
@@ -666,17 +666,17 @@ class OnceData:
               ave_past_min_first_horce_body - current_race_data[data_name.past_min_first_horce_body][count]
             t_instance[data_name.ave_past_min_last_horce_body] = \
               ave_past_min_last_horce_body - current_race_data[data_name.past_min_last_horce_body][count]
-            t_instance[data_name.max_race_horce_true_skill] = \
+            t_instance[data_name.max_horce_true_skill] = \
               max_race_horce_true_skill - current_race_data[data_name.horce_true_skill][count]
-            t_instance[data_name.max_race_jockey_true_skill] = \
+            t_instance[data_name.max_jockey_true_skill] = \
               max_race_jockey_true_skill - current_race_data[data_name.jockey_true_skill][count]
-            t_instance[data_name.max_race_trainer_true_skill] = \
+            t_instance[data_name.max_trainer_true_skill] = \
               max_race_trainer_true_skill - current_race_data[data_name.trainer_true_skill][count]
-            t_instance[data_name.max_race_horce_first_passing_true_skill] = \
+            t_instance[data_name.max_horce_first_passing_true_skill] = \
               max_race_horce_first_passing_true_skill - current_race_data[data_name.horce_first_passing_true_skill][count]
-            t_instance[data_name.max_race_jockey_first_passing_true_skill] = \
+            t_instance[data_name.max_jockey_first_passing_true_skill] = \
               max_race_jockey_first_passing_true_skill - current_race_data[data_name.jockey_first_passing_true_skill][count]
-            t_instance[data_name.max_race_trainer_first_passing_true_skill] = \
+            t_instance[data_name.max_trainer_first_passing_true_skill] = \
               max_race_trainer_first_passing_true_skill - current_race_data[data_name.trainer_first_passing_true_skill][count]
             t_instance[data_name.max_speed_index] = max_speed_index - current_race_data[data_name.speed_index][count]
             t_instance[data_name.max_up_rate] = max_up_rate - current_race_data[data_name.up_rate][count]
@@ -692,17 +692,17 @@ class OnceData:
               max_past_min_first_horce_body - current_race_data[data_name.past_min_first_horce_body][count]
             t_instance[data_name.max_past_min_last_horce_body] = \
               max_past_min_last_horce_body - current_race_data[data_name.past_min_last_horce_body][count]
-            t_instance[data_name.min_race_horce_true_skill] = \
+            t_instance[data_name.min_horce_true_skill] = \
               min_race_horce_true_skill - current_race_data[data_name.horce_true_skill][count]
-            t_instance[data_name.min_race_jockey_true_skill] = \
+            t_instance[data_name.min_jockey_true_skill] = \
               min_race_jockey_true_skill - current_race_data[data_name.jockey_true_skill][count]
-            t_instance[data_name.min_race_trainer_true_skill] = \
+            t_instance[data_name.min_trainer_true_skill] = \
             min_race_trainer_true_skill - current_race_data[data_name.trainer_true_skill][count]
-            t_instance[data_name.min_race_horce_first_passing_true_skill] = \
+            t_instance[data_name.min_horce_first_passing_true_skill] = \
               min_race_horce_first_passing_true_skill - current_race_data[data_name.horce_first_passing_true_skill][count]
-            t_instance[data_name.min_race_jockey_first_passing_true_skill] = \
+            t_instance[data_name.min_jockey_first_passing_true_skill] = \
               min_race_jockey_first_passing_true_skill - current_race_data[data_name.jockey_first_passing_true_skill][count]
-            t_instance[data_name.min_race_trainer_first_passing_true_skill] = \
+            t_instance[data_name.min_trainer_first_passing_true_skill] = \
               min_race_trainer_first_passing_true_skill - current_race_data[data_name.trainer_first_passing_true_skill][count]
             t_instance[data_name.min_speed_index] = min_speed_index - current_race_data[data_name.speed_index][count]
             t_instance[data_name.min_up_rate] = min_up_rate - current_race_data[data_name.up_rate][count]
