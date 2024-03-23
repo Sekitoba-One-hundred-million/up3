@@ -249,7 +249,10 @@ class OnceData:
             judgement_data = {}
             
             for param in self.jockey_judgement_param_list:
-                judgement_data["jockey_judgment_up3_{}".format( param )] = self.race_horce_data.data[horce_id]["jockey_judgment_up3"][param]
+                try:
+                    judgement_data["jockey_judgment_up3_{}".format( param )] = self.race_horce_data.data[horce_id]["jockey_judgment_up3"][param]
+                except:
+                    judgement_data["jockey_judgment_up3_{}".format( param )] = -1000
 
             train_score = -10000
 
