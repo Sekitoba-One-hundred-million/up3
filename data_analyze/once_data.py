@@ -517,14 +517,14 @@ class OnceData:
             t_instance[data_name.horce_sex] = self.horce_data.data[horce_id]["sex"]
             t_instance[data_name.limb] = limb_math
             t_instance[data_name.my_limb_count] = current_race_data[data_name.my_limb_count][key_limb]
-            #t_instance[data_name.odds] = cd.odds()
+            t_instance[data_name.odds] = cd.odds()
             t_instance[data_name.one_popular_limb] = one_popular_limb
-            #t_instance[data_name.one_popular_odds] = one_popular_odds
+            t_instance[data_name.one_popular_odds] = one_popular_odds
             t_instance[data_name.place] = place_num
             t_instance[data_name.std_past_ave_first_horce_body] = std_past_ave_first_horce_body
             t_instance[data_name.std_past_ave_last_horce_body] = std_past_ave_last_horce_body
             t_instance[data_name.two_popular_limb] = two_popular_limb
-            #t_instance[data_name.two_popular_odds] = two_popular_odds
+            t_instance[data_name.two_popular_odds] = two_popular_odds
             t_instance[data_name.up3_standard_value] = up3_standard_value
             t_instance[data_name.weight] = cd.weight() / 10
             t_instance[data_name.weather] = cd.weather()
