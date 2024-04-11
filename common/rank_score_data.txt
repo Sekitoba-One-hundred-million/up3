@@ -149,7 +149,9 @@ min_up3_stand
 min_up_rate
 money
 my_limb_count
+odds
 one_popular_limb
+one_popular_odds
 one_rate
 pace_up
 passing_regression
@@ -199,6 +201,7 @@ trainer_true_skill
 trainer_true_skill_index
 trainer_true_skill_stand
 two_popular_limb
+two_popular_odds
 two_rate
 up3_horce_true_skill
 up3_horce_true_skill_index
