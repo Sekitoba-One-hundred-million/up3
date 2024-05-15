@@ -13,6 +13,7 @@ from sekitoba_data_create.time_index_get import TimeIndexGet
 from sekitoba_data_create.jockey_data_get import JockeyAnalyze
 from sekitoba_data_create.trainer_data_get import TrainerAnalyze
 from sekitoba_data_create.high_level_data_get import RaceHighLevel
+from sekitoba_data_create.last_wrap import LastWrap
 
 from common.name import Name
 
@@ -26,6 +27,7 @@ class OnceData:
     def __init__( self ):
         self.race_data = ps.RaceData()
         self.race_horce_data = ps.RaceHorceData()
+        self.parent_data = ps.HorceData()
         self.horce_data = ps.HorceData()
         self.trainer_data = ps.TrainerData()
         self.jockey_data = ps.JockeyData()
@@ -39,6 +41,7 @@ class OnceData:
         self.time_index = TimeIndexGet( self.horce_data )
         self.trainer_analyze = TrainerAnalyze( self.race_data, self.race_horce_data, self.trainer_data )
         self.jockey_analyze = JockeyAnalyze( self.race_data, self.race_horce_data, self.jockey_data )
+        self.last_wrap = LastWrap( self.race_data, self.horce_data, self.race_horce_data )
 
         self.data_name_list = []
         self.write_data_list = []
@@ -103,11 +106,26 @@ class OnceData:
         self.trainer_data.get_multi_data( self.race_horce_data.trainer_id_list )
         self.jockey_data.get_multi_data( self.race_horce_data.jockey_id_list )
 
+        parent_id_data = {}
+
+        for horce_id in self.race_horce_data.horce_id_list:
+            father_id = ""
+            mother_id = ""
+
+            try:
+                father_id = self.horce_data.data[horce_id]["parent_id"]["father"]
+                mother_id = self.horce_data.data[horce_id]["parent_id"]["mother"]
+            except:
+                continue
+
+            parent_id_data[father_id] = True
+            parent_id_data[mother_id] = True
+
+        self.parent_data.get_multi_data( list( parent_id_data.keys() ) )
         year = race_id[0:4]
         race_place_num = race_id[4:6]
         day = race_id[9]
         num = race_id[7]
-
         key_place = str( self.race_data.data["place"] )
         key_dist = str( self.race_data.data["dist"] )
         key_kind = str( self.race_data.data["kind"] )      
@@ -120,7 +138,7 @@ class OnceData:
         if key_kind == "0" or key_kind == "3":
             return
 
-        predict_pace = -1
+        predict_pace = {}
         predict_netkeiba_pace = -1
 
         if race_id in self.predict_pace_data:
@@ -267,6 +285,7 @@ class OnceData:
             speed, up_speed, pace_speed = pd.speed_index( self.horce_data.data[horce_id]["baba_index"] )
             corner_diff_rank_ave = pd.corner_diff_rank()
             stride_ablity_data = self.stride_ablity.ablity_create( cd, pd )
+            pace_up_rate = pd.pace_up_rate()
 
             for stride_data_key in stride_ablity_data.keys():
                 for math_key in stride_ablity_data[stride_data_key].keys():
@@ -303,7 +322,7 @@ class OnceData:
             current_race_data[data_name.past_ave_last_horce_body].append( past_ave_last_horce_body )
             current_race_data[data_name.past_std_first_horce_body].append( past_std_first_horce_body )
             current_race_data[data_name.past_std_last_horce_body].append( past_std_last_horce_body )
-            current_race_data[data_name.predict_train_score].append( train_score )
+            #current_race_data[data_name.predict_train_score].append( train_score )
             current_race_data[data_name.up_index].append( lib.max_check( up_speed ) )
             horce_id_list.append( horce_id )
 
@@ -311,9 +330,13 @@ class OnceData:
                 lib.dic_append( current_race_data, judge_key, [] )
                 current_race_data[judge_key].append( judgement_data[judge_key] )
 
+            for pace_up_rate_key in pace_up_rate.keys():
+                current_race_data[data_name.pace_up_rate+"_"+pace_up_rate_key].append( pace_up_rate[pace_up_rate_key] )
+
         if len( horce_id_list ) < 2:
             return
 
+        self.last_wrap.create_score()
         sort_race_data: dict[ str, list ] = {}
         ave_burden_weight = lib.average( current_race_data[data_name.burden_weight] )
         current_key_list = []
@@ -437,11 +460,37 @@ class OnceData:
             key_horce_num = str( int( cd.horce_number() ) )
             before_year = int( year ) - 1
             key_before_year = str( int( before_year ) )
-            father_id = self.horce_data.data[horce_id]["parent_id"]["father"]
-            mother_id = self.horce_data.data[horce_id]["parent_id"]["mother"]
+            father_id = ""
+            mother_id = ""
+
+            try:
+                father_id = self.horce_data.data[horce_id]["parent_id"]["father"]
+                mother_id = self.horce_data.data[horce_id]["parent_id"]["mother"]
+            except:
+                pass
+
+            father_pace_up3 = { "ave": -1000,
+                               "conv": -1000,
+                               "max": -1000,
+                               "min": -1000 }
+            mother_pace_up3 = { "ave": -1000,
+                               "conv": -1000,
+                               "max": -1000,
+                               "min": -1000 }
+
+            try:
+                father_pd = lib.past_data( self.parent_data.data[father_id]["past_data"], current_data, self.race_data )
+                father_pace_up3 = father_pd.pace_up_rate()
+            except:
+                pass
+
+            try:
+                mother_pd = lib.past_data( self.parent_data.data[mother_id]["past_data"], current_data, self.race_data )
+                mother_pace_up3 = mother_pd.pace_up_rate()
+            except:
+                pass
 
             limb_math = race_limb[horce_id]#lib.limb_search( pd )
-
             escape_within_rank = -1
 
             if limb_math == 1 or limb_math == 2:
@@ -625,7 +674,6 @@ class OnceData:
             t_instance[data_name.popular_rank] = popular_rank
             t_instance[data_name.before_speed] = before_speed_score
             t_instance[data_name.before_popular] = before_popular
-            t_instance[data_name.predict_pace] = predict_pace
             t_instance[data_name.predict_last_passing_rank] = predict_last_passing_rank
             t_instance[data_name.predict_last_passing_rank_index] = predict_last_passing_rank_index
             t_instance[data_name.predict_last_passing_rank_stand] = predict_last_passing_rank_stand
@@ -639,6 +687,19 @@ class OnceData:
             t_instance[data_name.speed_index_stand] = current_race_data[data_name.speed_index_stand][count]
             t_instance[data_name.predict_netkeiba_pace] = predict_netkeiba_pace
             t_instance[data_name.predict_netkeiba_deployment] = predict_netkeiba_deployment
+
+            for key in father_pace_up3.keys():
+                t_instance[data_name.father_pace_up3_rate+"_"+key] = father_pace_up3[key]
+                t_instance[data_name.mother_pace_up3_rate+"_"+key] = mother_pace_up3[key]
+
+            for pace_key in lib.predict_pace_key_list:
+                if pace_key in predict_pace:
+                    t_instance["predict_"+pace_key] = predict_pace[pace_key]
+                else:
+                    t_instance["predict_"+pace_key] = -1000
+
+            for wrap_key in self.last_wrap.horce_wrap_score[horce_id].keys():
+                t_instance[wrap_key] = self.last_wrap.horce_wrap_score[horce_id][wrap_key]
             
             for judge_key in judgement_data.keys():
                 t_instance[judge_key] = judgement_data[judge_key]
