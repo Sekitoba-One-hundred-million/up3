@@ -271,11 +271,3 @@ min_last_wrap
 max_last_wrap
 ave_last_wrap
 std_last_wrap
-father_pace_up3_rate_ave
-father_pace_up3_rate_conv
-father_pace_up3_rate_max
-father_pace_up3_rate_min
-mother_pace_up3_rate_ave
-mother_pace_up3_rate_conv
-mother_pace_up3_rate_max
-mother_pace_up3_rate_min

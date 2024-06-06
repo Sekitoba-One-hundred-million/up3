@@ -469,27 +469,6 @@ class OnceData:
             except:
                 pass
 
-            father_pace_up3 = { "ave": -1000,
-                               "conv": -1000,
-                               "max": -1000,
-                               "min": -1000 }
-            mother_pace_up3 = { "ave": -1000,
-                               "conv": -1000,
-                               "max": -1000,
-                               "min": -1000 }
-
-            try:
-                father_pd = lib.past_data( self.parent_data.data[father_id]["past_data"], current_data, self.race_data )
-                father_pace_up3 = father_pd.pace_up_rate()
-            except:
-                pass
-
-            try:
-                mother_pd = lib.past_data( self.parent_data.data[mother_id]["past_data"], current_data, self.race_data )
-                mother_pace_up3 = mother_pd.pace_up_rate()
-            except:
-                pass
-
             limb_math = race_limb[horce_id]#lib.limb_search( pd )
             escape_within_rank = -1
 
@@ -687,10 +666,6 @@ class OnceData:
             t_instance[data_name.speed_index_stand] = current_race_data[data_name.speed_index_stand][count]
             t_instance[data_name.predict_netkeiba_pace] = predict_netkeiba_pace
             t_instance[data_name.predict_netkeiba_deployment] = predict_netkeiba_deployment
-
-            for key in father_pace_up3.keys():
-                t_instance[data_name.father_pace_up3_rate+"_"+key] = father_pace_up3[key]
-                t_instance[data_name.mother_pace_up3_rate+"_"+key] = mother_pace_up3[key]
 
             for pace_key in lib.predict_pace_key_list:
                 if pace_key in predict_pace:
