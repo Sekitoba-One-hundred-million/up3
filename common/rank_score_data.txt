@@ -271,3 +271,6 @@ min_last_wrap
 max_last_wrap
 ave_last_wrap
 std_last_wrap
+stamina
+stamina_index
+stamina_stand

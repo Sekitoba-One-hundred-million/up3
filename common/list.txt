@@ -1,3 +1,4 @@
+
 age
 all_horce_num
 ave_age_diff
@@ -355,3 +356,6 @@ mother_pace_up3_rate_ave
 mother_pace_up3_rate_conv
 mother_pace_up3_rate_max
 mother_pace_up3_rate_min
+stamina
+stamina_index
+stamina_stand

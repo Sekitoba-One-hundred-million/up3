@@ -357,3 +357,6 @@ class Name:
         self.mother_pace_up3_rate_conv = "mother_pace_up3_rate_conv"
         self.mother_pace_up3_rate_max = "mother_pace_up3_rate_max"
         self.mother_pace_up3_rate_min = "mother_pace_up3_rate_min"
+        self.stamina = "stamina"
+        self.stamina_index = "stamina_index"
+        self.stamina_stand = "stamina_stand"
