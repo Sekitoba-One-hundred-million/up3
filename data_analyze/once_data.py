@@ -4,16 +4,16 @@ import sklearn
 from tqdm import tqdm
 from mpi4py import MPI
 
-import sekitoba_library as lib
-import sekitoba_data_manage as dm
-import sekitoba_psql as ps
+import SekitobaLibrary as lib
+import SekitobaDataManage as dm
+import SekitobaPsql as ps
 
-from sekitoba_data_create.stride_ablity import StrideAblity
-from sekitoba_data_create.time_index_get import TimeIndexGet
-from sekitoba_data_create.jockey_data_get import JockeyAnalyze
-from sekitoba_data_create.trainer_data_get import TrainerAnalyze
-from sekitoba_data_create.high_level_data_get import RaceHighLevel
-from sekitoba_data_create.last_wrap import LastWrap
+from SekitobaDataCreate.stride_ablity import StrideAblity
+from SekitobaDataCreate.time_index_get import TimeIndexGet
+from SekitobaDataCreate.jockey_data_get import JockeyAnalyze
+from SekitobaDataCreate.trainer_data_get import TrainerAnalyze
+from SekitobaDataCreate.high_level_data_get import RaceHighLevel
+from SekitobaDataCreate.last_wrap import LastWrap
 
 from common.name import Name
 
