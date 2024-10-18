@@ -1,8 +1,11 @@
-/importance_data.txt
+/*.txt
 /log/
-/__pycache__/
 /common/__pycache__/
 /learn/__pycache__/
 /learn/common/
 /data_analyze/__pycache__/
 /data_analyze/common/
+/simulation/__pycache__/
+/rank_learn/__pycache__/
+.direnv/
+.devenv/
