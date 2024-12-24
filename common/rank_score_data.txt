@@ -39,7 +39,6 @@ dist_kind
 dist_kind_count
 escape_limb1_count
 escape_limb2_count
-escape_within_rank
 high_level_score
 horce_first_passing_true_skill
 horce_first_passing_true_skill_index
