@@ -177,11 +177,6 @@ class OnceData:
             elif getHorceData.limb_math == 2:
                 escape_limb2_count += 1
 
-            escape_within_rank = -1
-            
-            if getHorceData.limb_math == 1 or getHorceData.limb_math == 2:
-                escape_within_rank = cd.horceNumber()
-
             jockey_id = self.race_horce_data.data[horce_id]["jockey_id"]
             trainer_id = self.race_horce_data.data[horce_id]["trainer_id"]
 
@@ -256,7 +251,6 @@ class OnceData:
             current_race_data[data_name.burden_weight].append( cd.burdenWeight() )
             current_race_data[data_name.level_score].append( pd.level_score( self.race_data.data["money_class_true_skill"] ) )
             current_race_data[data_name.level_up3].append( pd.level_up3( self.race_data.data["money_class_true_skill"] ) )
-            current_race_data[data_name.escape_within_rank].append( escape_within_rank )
             current_race_data[data_name.past_min_first_horce_body].append( past_min_first_horce_body )
             current_race_data[data_name.past_min_last_horce_body].append( past_min_last_horce_body )
             current_race_data[data_name.past_max_first_horce_body].append( past_max_first_horce_body )
@@ -283,7 +277,6 @@ class OnceData:
         sort_race_data: dict[ str, list ] = {}
         ave_burden_weight = lib.average( current_race_data[data_name.burden_weight] )
         current_key_list = []
-        current_race_data[data_name.escape_within_rank] = sorted( current_race_data[data_name.escape_within_rank], reverse = True )
 
         for data_key in current_race_data.keys():
             if not type( current_race_data[data_key] ) is list or \
@@ -373,11 +366,6 @@ class OnceData:
             popular_rank = getHorceData.getPopularRank()
             before_first_passing_rank, before_last_passing_rank = getHorceData.getBeforePassingRank()
             limb_math = race_limb[horce_id]
-            escape_within_rank = lib.escapeValue
-
-            if getHorceData.limb_math == 1 or getHorceData.limb_math == 2:
-                escape_within_rank = current_race_data[data_name.escape_within_rank].index( getHorceData.horce_num )
-            
             judgement_data = {}
 
             for param in self.jockey_judgement_param_list:
@@ -431,7 +419,6 @@ class OnceData:
             t_instance[data_name.dist_kind_count] = pd.distKindCount()
             t_instance[data_name.escape_limb1_count] = escape_limb1_count
             t_instance[data_name.escape_limb2_count] = escape_limb2_count
-            t_instance[data_name.escape_within_rank] = escape_within_rank
             t_instance[data_name.horce_num] = getHorceData.horce_num
             t_instance[data_name.horce_sex] = self.horce_data.data[horce_id]["sex"]
             t_instance[data_name.limb] = limb_math
