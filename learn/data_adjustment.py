@@ -36,7 +36,7 @@ def data_check( data, state = "test" ):
 
     return result
 
-def score_check( simu_data, model, score_years = lib.test_years, upload = False ):
+def score_check( simu_data, modelList, score_years = lib.test_years, upload = False ):
     score = 0
     count = 0
     simu_predict_data = {}
@@ -47,7 +47,10 @@ def score_check( simu_data, model, score_years = lib.test_years, upload = False 
             predict_use_data.append( simu_data[race_id][horce_id]["data"] )
 
     c = 0
-    predict_data = model.predict( np.array( predict_use_data ) )
+    predict_data = []
+
+    for model in modelList:
+        predict_data.append( model.predict( np.array( predict_use_data ) ) )
 
     for race_id in simu_data.keys():
         year = race_id[0:4]
@@ -58,7 +61,12 @@ def score_check( simu_data, model, score_years = lib.test_years, upload = False 
         all_horce_num = len( simu_data[race_id] )
         
         for horce_id in simu_data[race_id].keys():
-            predict_score = predict_data[c]
+            predict_score = 0
+
+            for i in range( 0, len( predict_data ) ):
+                predict_score += predict_data[i][c]
+
+            predict_score /= len( predict_data )
             answer_up3 = simu_data[race_id][horce_id]["answer"]["up3"]
             check_data.append( { "horce_id": horce_id, "answer": answer_up3, "score": predict_score } )
             score_list.append( predict_score )
