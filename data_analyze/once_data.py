@@ -223,7 +223,7 @@ class OnceData:
             speed, up_speed, pace_speed = pd.speed_index( self.horce_data.data[horce_id]["baba_index"] )
             corner_diff_rank_ave = pd.corner_diff_rank()
             stride_ablity_data = self.stride_ablity.ablity_create( cd, pd )
-            pace_up_rate = pd.pace_up_rate()
+            #pace_up_rate = pd.pace_up_rate()
 
             for stride_data_key in stride_ablity_data.keys():
                 current_race_data[stride_data_key].append( stride_ablity_data[stride_data_key] )
@@ -267,8 +267,8 @@ class OnceData:
                 lib.dic_append( current_race_data, judge_key, [] )
                 current_race_data[judge_key].append( judgement_data[judge_key] )
 
-            for pace_up_rate_key in pace_up_rate.keys():
-                current_race_data[data_name.pace_up_rate+"_"+pace_up_rate_key].append( pace_up_rate[pace_up_rate_key] )
+            #for pace_up_rate_key in pace_up_rate.keys():
+            #    current_race_data[data_name.pace_up_rate+"_"+pace_up_rate_key].append( pace_up_rate[pace_up_rate_key] )
 
         if len( horce_id_list ) < 2:
             return
@@ -424,18 +424,18 @@ class OnceData:
             t_instance[data_name.limb] = limb_math
             t_instance[data_name.my_limb_count] = current_race_data[data_name.my_limb_count][getHorceData.key_limb]
             t_instance[data_name.odds] = cd.odds()
-            t_instance[data_name.one_popular_limb] = one_popular_limb
-            t_instance[data_name.one_popular_odds] = one_popular_odds
+            #t_instance[data_name.one_popular_limb] = one_popular_limb
+            #t_instance[data_name.one_popular_odds] = one_popular_odds
             t_instance[data_name.place] = place_num
             t_instance[data_name.std_past_ave_first_horce_body] = std_past_ave_first_horce_body
             t_instance[data_name.std_past_ave_last_horce_body] = std_past_ave_last_horce_body
-            t_instance[data_name.two_popular_limb] = two_popular_limb
-            t_instance[data_name.two_popular_odds] = two_popular_odds
+            #t_instance[data_name.two_popular_limb] = two_popular_limb
+            #t_instance[data_name.two_popular_odds] = two_popular_odds
             t_instance[data_name.up3_standard_value] = up3_standard_value
             t_instance[data_name.weight] = cd.weight() / 10
             t_instance[data_name.weather] = cd.weather()
             t_instance[data_name.diff_load_weight] = diff_load_weight
-            t_instance[data_name.popular] = cd.popular()
+            #t_instance[data_name.popular] = cd.popular()
             t_instance[data_name.ave_horce_true_skill] = \
               lib.minus( ave_race_horce_true_skill, current_race_data[data_name.horce_true_skill][count] )
             t_instance[data_name.ave_jockey_true_skill] = \
@@ -522,7 +522,7 @@ class OnceData:
             t_instance[data_name.before_continue_not_three_rank] = pd.before_continue_not_three_rank()
             t_instance[data_name.diff_pace_time] = pd.diff_pace_time()
             t_instance[data_name.diff_pace_first_passing] = pd.diff_pace_first_passing()
-            t_instance[data_name.pace_up] = pd.pace_up_check( self.race_data.data["up_pace_regressin"] )
+            #t_instance[data_name.pace_up] = pd.pace_up_check( self.race_data.data["up_pace_regressin"] )
             t_instance[data_name.high_level_score] = self.race_high_level.data_get( cd, pd, ymd )
             t_instance[data_name.jockey_rank] = self.jockey_analyze.rank( race_id, horce_id )
             t_instance[data_name.jockey_year_rank] = self.jockey_analyze.year_rank( horce_id, getHorceData.key_before_year )
