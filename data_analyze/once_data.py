@@ -47,7 +47,7 @@ class OnceData:
         self.simu_data = {}
         self.jockey_judgement_param_list = [ "limb", "popular", "flame_num", "dist", "kind", "baba", "place" ]
         self.trainer_judgement_param_list = [ "limb", "popular", "flame_num", "dist", "kind", "baba", "place" ]
-        self.result = { "answer": [], "teacher": [], "query": [], "year": [], "level": [], "diff": [], "horce_body": [] }
+        self.result = { "answer": [], "teacher": [], "query": [], "year": [], "odds_index": [] }
         self.data_name_read()
 
     def data_name_read( self ):
@@ -69,32 +69,19 @@ class OnceData:
         result = []
         write_instance = []
         
-        for data_name in self.data_name_list:
-            try:
-                result.append( round( data_dict[data_name], 3 ) )
-                write_instance.append( data_name )
-            except:
-                continue
+        for data_name in data_dict.keys():
+            result.append( round( data_dict[data_name], 3 ) )
+            write_instance.append( data_name )
 
         if len( self.write_data_list ) == 0:
             self.write_data_list = copy.deepcopy( write_instance )
 
         return result
 
-    def division( self, score, d ):
-        if score < 0:
-            score *= -1
-            score /= d
-            score *= -1
-        else:
-            score /= d
-
-        return int( score )
-
     def clear( self ):
         dm.dl.data_clear()
     
-    def create( self, race_id ):
+    def create( self, race_id, odds_index ):
         self.race_data.get_all_data( race_id )
         self.race_horce_data.get_all_data( race_id )
 
@@ -163,6 +150,8 @@ class OnceData:
             if not cd.race_check():
                 continue
 
+            cd.setting_odds( self.race_data.data["dev_odds_popular"][odds_index][horce_id]["odds"] )
+            cd.setting_popular( self.race_data.data["dev_odds_popular"][odds_index][horce_id]["popular"] )
             getHorceData = GetHorceData( cd, pd )
             getHorceDataDict[horce_id] = getHorceData
 
@@ -350,6 +339,8 @@ class OnceData:
             if not cd.race_check():
                 continue
 
+            cd.setting_odds( self.race_data.data["dev_odds_popular"][odds_index][horce_id]["odds"] )
+            cd.setting_popular( self.race_data.data["dev_odds_popular"][odds_index][horce_id]["popular"] )
             #getHorceData = getHorceDataDict[horce_id]
             getHorceData = GetHorceData( cd, pd )
             place_num = int( race_place_num )
@@ -387,9 +378,9 @@ class OnceData:
             predict_last_passing_rank_stand = lib.escapeValue
 
             if race_id in self.predict_last_passing_rank and horce_id in self.predict_last_passing_rank[race_id]:
-                predict_last_passing_rank = self.predict_last_passing_rank[race_id][horce_id]["score"]
-                predict_last_passing_rank_index = self.predict_last_passing_rank[race_id][horce_id]["index"]
-                predict_last_passing_rank_stand = self.predict_last_passing_rank[race_id][horce_id]["stand"]
+                predict_last_passing_rank = self.predict_last_passing_rank[race_id][horce_id][odds_index]["score"]
+                predict_last_passing_rank_index = self.predict_last_passing_rank[race_id][horce_id][odds_index]["index"]
+                predict_last_passing_rank_stand = self.predict_last_passing_rank[race_id][horce_id][odds_index]["stand"]
 
             predict_netkeiba_deployment = lib.escapeValue
 
@@ -424,18 +415,18 @@ class OnceData:
             t_instance[data_name.limb] = limb_math
             t_instance[data_name.my_limb_count] = current_race_data[data_name.my_limb_count][getHorceData.key_limb]
             t_instance[data_name.odds] = cd.odds()
-            #t_instance[data_name.one_popular_limb] = one_popular_limb
-            #t_instance[data_name.one_popular_odds] = one_popular_odds
+            t_instance[data_name.one_popular_limb] = one_popular_limb
+            t_instance[data_name.one_popular_odds] = one_popular_odds
             t_instance[data_name.place] = place_num
             t_instance[data_name.std_past_ave_first_horce_body] = std_past_ave_first_horce_body
             t_instance[data_name.std_past_ave_last_horce_body] = std_past_ave_last_horce_body
-            #t_instance[data_name.two_popular_limb] = two_popular_limb
-            #t_instance[data_name.two_popular_odds] = two_popular_odds
+            t_instance[data_name.two_popular_limb] = two_popular_limb
+            t_instance[data_name.two_popular_odds] = two_popular_odds
             t_instance[data_name.up3_standard_value] = up3_standard_value
             t_instance[data_name.weight] = cd.weight() / 10
             t_instance[data_name.weather] = cd.weather()
             t_instance[data_name.diff_load_weight] = diff_load_weight
-            #t_instance[data_name.popular] = cd.popular()
+            t_instance[data_name.popular] = cd.popular()
             t_instance[data_name.ave_horce_true_skill] = \
               lib.minus( ave_race_horce_true_skill, current_race_data[data_name.horce_true_skill][count] )
             t_instance[data_name.ave_jockey_true_skill] = \
@@ -544,19 +535,19 @@ class OnceData:
             t_instance[data_name.speed_index_stand] = current_race_data[data_name.speed_index_stand][count]
             t_instance[data_name.predict_netkeiba_pace] = predict_netkeiba_pace
             t_instance[data_name.predict_netkeiba_deployment] = predict_netkeiba_deployment
-            t_instance.update( getHorceData.getPredictPace( predict_pace ) )
+            t_instance.update( getHorceData.getPredictPace( predict_pace, odds_index ) )
             t_instance.update( lib.horce_teacher_analyze( current_race_data, t_instance, count ) )
 
             t_list = self.data_list_create( t_instance )
             up3_time = cd.up_time()
 
             lib.dic_append( self.simu_data, race_id, {} )
-            self.simu_data[race_id][horce_id] = {}
-            self.simu_data[race_id][horce_id]["data"] = t_list
-            self.simu_data[race_id][horce_id]["answer"] = { "up3": up3_time,
-                                                           "odds": cd.odds(),
-                                                           "popular": cd.popular(),
-                                                           "horce_num": getHorceData.horce_num }
+            lib.dic_append( self.simu_data[race_id], horce_id, [{} for _ in range(lib.max_odds_index)] )
+            self.simu_data[race_id][horce_id][odds_index]["data"] = t_list
+            self.simu_data[race_id][horce_id][odds_index]["answer"] = { "up3": up3_time,
+                                                                        "odds": cd.odds(),
+                                                                        "popular": cd.popular(),
+                                                                        "horce_num": getHorceData.horce_num }
             answer_data.append( up3_time )
             teacher_data.append( t_list )
 
@@ -564,4 +555,5 @@ class OnceData:
             self.result["answer"].append( answer_data )
             self.result["teacher"].append( teacher_data )
             self.result["year"].append( year )
+            self.result["odds_index"].append( odds_index )
             self.result["query"].append( { "q": len( answer_data ), "year": year } )

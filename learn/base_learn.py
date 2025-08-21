@@ -78,13 +78,14 @@ def importance_check( model ):
 
 def main( data, simu_data, state = "test" ):
     modelList = []
+    modelList = dm.pickle_load( lib.name.model_name() )
     learn_data = data_adjustment.data_check( data, state = state )
 
-    for i in range( 0, 5 ):
-        model = lg_main( learn_data, index = i )
-        modelList.append( model )
+    #for i in range( 0, 5 ):
+    #    model = lg_main( learn_data, index = i )
+    #    modelList.append( model )
         
-    importance_check( model )
+    #importance_check( model )
     data_adjustment.score_check( simu_data, modelList, score_years = lib.simu_years, upload = True )
 
     dm.pickle_upload( lib.name.model_name(), modelList )
