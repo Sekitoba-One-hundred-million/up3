@@ -10,7 +10,7 @@ import SekitobaLibrary as lib
 import SekitobaDataManage as dm
 from learn import data_adjustment
 
-def lg_main( data, index = None ):
+def lg_main( data, category_index_list, index = None ):
     params = {}
     
     if os.path.isfile( "best_params.json" ) and not index is None:
@@ -26,8 +26,12 @@ def lg_main( data, index = None ):
         params["lambda_l1"] = 0
         params["lambda_l2"] = 0
 
-    lgb_train = lgb.Dataset( np.array( data["teacher"] ), np.array( data["answer"] ) )
-    lgb_vaild = lgb.Dataset( np.array( data["test_teacher"] ), np.array( data["test_answer"] ) )
+    lgb_train = lgb.Dataset( np.array( data["teacher"] ), \
+                             np.array( data["answer"] ), \
+                             categorical_feature = category_index_list )
+    lgb_vaild = lgb.Dataset( np.array( data["test_teacher"] ), \
+                             np.array( data["test_answer"] ), \
+                             categorical_feature = category_index_list )
     
     lgbm_params =  {
         #'task': 'train',
@@ -78,10 +82,11 @@ def importance_check( model ):
 
 def main( data, simu_data, state = "test" ):
     modelList = []
+    category_index_list = lib.create_category_index( data["category"] )
     learn_data = data_adjustment.data_check( data, state = state )
 
     for i in range( 0, 5 ):
-        model = lg_main( learn_data, index = i )
+        model = lg_main( learn_data, category_index_list, index = i )
         modelList.append( model )
         
     importance_check( model )

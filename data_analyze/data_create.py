@@ -56,15 +56,19 @@ def main( update = False ):
             comm.send( True, dest = i, tag = 1 )
 
         result["simu"] = {}
-        result["data"] = { "answer": [], "teacher": [], "query": [], "year": [], "level": [], "diff": [], "horce_body": [] }
+        result["data"] = {}
         
         for i in range( 1, size ):
             file_name = comm.recv( source = i, tag = 2 )
             instance = dm.pickle_load( file_name )
             result["simu"].update( instance["simu"] )
 
-            for k in instance["data"].keys():
-                result["data"][k].extend( instance["data"][k] )
+            if len( result["data"] ) == 0:
+                result["data"].update( instance["data"] )
+            else:
+                for k in instance["data"].keys():
+                    if not k == "category":
+                        result["data"][k].extend( instance["data"][k] )
 
         dm.pickle_upload( lib.name.data_name(), result["data"] )
         dm.pickle_upload( lib.name.simu_name(), result["simu"] )
