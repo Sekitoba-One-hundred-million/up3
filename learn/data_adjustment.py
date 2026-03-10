@@ -69,26 +69,28 @@ def score_check( simu_data, modelList, score_years = lib.test_years, upload = Fa
             predict_score /= len( predict_data )
             answer_up3 = simu_data[race_id][horce_id]["answer"]["up3"]
             check_data.append( { "horce_id": horce_id, "answer": answer_up3, "score": predict_score } )
-            score_list.append( predict_score )
             c += 1
 
-        stand_score_list = lib.standardization( score_list )
-        sort_score_list = sorted( score_list )
+        stand_score_list = []
         check_data = sorted( check_data, key = lambda x: x["score"] )
-        
+
+        for i in range( 0, len( check_data ) ):
+            stand_score_list.append( check_data[i]["score"] )
+            
+        stand_score_list = lib.standardization( stand_score_list )
+            
         for i in range( 0, len( check_data ) ):
             predict_score = check_data[i]["score"]
             simu_predict_data[race_id][check_data[i]["horce_id"]] = {}
-            simu_predict_data[race_id][check_data[i]["horce_id"]]["index"] = sort_score_list.index( predict_score )
+            simu_predict_data[race_id][check_data[i]["horce_id"]]["index"] = i + 1
             simu_predict_data[race_id][check_data[i]["horce_id"]]["score"] = predict_score
             simu_predict_data[race_id][check_data[i]["horce_id"]]["stand"] = stand_score_list[i]
 
             if year in score_years and not int( race_place_num ) == 8:
-                score += math.pow( predict_score - check_data[i]["answer"], 2 )
+                score += abs( predict_score - check_data[i]["answer"] )
                 count += 1            
             
     score /= count
-    score = math.sqrt( score )
     print( "score: {}".format( score ) )
 
     if upload:

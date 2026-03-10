@@ -342,6 +342,9 @@ condition_devi_devi
 predict_pace
 predict_netkeiba_pace
 predict_netkeiba_deployment
+predict_first_up3
+predict_first_up3_index
+predict_first_up3_stand
 min_last_wrap
 max_last_wrap
 ave_last_wrap

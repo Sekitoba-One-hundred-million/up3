@@ -266,6 +266,8 @@ popular_rank
 predict_after_pace_regression
 predict_before_pace_regression
 predict_first_up3
+predict_first_up3_index
+predict_first_up3_stand
 predict_last_passing_rank
 predict_last_passing_rank_index
 predict_last_passing_rank_stand
