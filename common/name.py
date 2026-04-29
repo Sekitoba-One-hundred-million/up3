@@ -238,6 +238,7 @@ class Name:
         self.speed_index = "speed_index"
         self.speed_index_index = "speed_index_index"
         self.speed_index_stand = "speed_index_stand"
+        self.time_index = "time_index"
         self.std_past_ave_first_horce_body = "std_past_ave_first_horce_body"
         self.std_past_ave_last_horce_body = "std_past_ave_last_horce_body"
         self.std_past_max_first_horce_body = "std_past_max_first_horce_body"

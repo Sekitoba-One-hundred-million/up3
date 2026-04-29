@@ -226,7 +226,6 @@ min_up3_stand
 min_up_rate
 money
 my_limb_count
-odds
 one_rate
 passing_regression
 past_ave_first_horce_body
@@ -290,6 +289,7 @@ pursuing_power_min_devi
 pursuing_power_min_index
 pursuing_power_min_stand
 speed_index
+speed_index_devi
 speed_index_index
 speed_index_stand
 stamina
@@ -314,6 +314,10 @@ sustain_power_min_stand
 three_average
 three_difference
 three_rate
+time_index
+time_index_devi
+time_index_index
+time_index_stand
 trainer_first_passing_true_skill
 trainer_first_passing_true_skill_devi
 trainer_first_passing_true_skill_index
@@ -338,6 +342,7 @@ up3_trainer_true_skill_devi
 up3_trainer_true_skill_index
 up3_trainer_true_skill_stand
 up_index
+up_index_devi
 up_index_index
 up_index_stand
 up_rate

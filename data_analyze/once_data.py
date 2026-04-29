@@ -243,8 +243,8 @@ class OnceData:
             current_race_data[data_name.up3_jockey_true_skill].append( up3_jockey_true_skill )
             current_race_data[data_name.up3_trainer_true_skill].append( up3_trainer_true_skill )
             current_race_data[data_name.corner_diff_rank_ave].append( corner_diff_rank_ave )
-            current_race_data[data_name.speed_index].append( max( lib.max_check( speed ) + current_time_index["max"], \
-                                                                 lib.escapeValue ) )
+            current_race_data[data_name.speed_index].append( lib.max_check( speed ) )
+            current_race_data[data_name.time_index].append( current_time_index["max"] )
             current_race_data[data_name.up_rate].append( pd.up_rate( key_race_money_class, self.race_data.data["up_kind_ave"] ) )
             current_race_data[data_name.match_up3].append( pd.match_up3() )
             current_race_data[data_name.max_up3].append( pd.max_up3() )
@@ -443,7 +443,7 @@ class OnceData:
             t_instance[data_name.limb] = limb_math
             category_data.append( data_name.limb )
             t_instance[data_name.my_limb_count] = current_race_data[data_name.my_limb_count][getHorceData.key_limb]
-            t_instance[data_name.odds] = cd.odds()
+            #t_instance[data_name.odds] = cd.odds()
             #t_instance[data_name.one_popular_limb] = one_popular_limb
             #t_instance[data_name.one_popular_odds] = one_popular_odds
             t_instance[data_name.place] = place_num
