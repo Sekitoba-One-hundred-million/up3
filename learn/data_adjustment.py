@@ -12,6 +12,7 @@ def data_check( data, state = "test" ):
     result["test_answer"] = []
     result["query"] = []
     result["test_query"] = []
+    result["race_id"] = []
 
     for i in range( 0, len( data["teacher"] ) ):
         year = data["year"][i]
@@ -33,10 +34,11 @@ def data_check( data, state = "test" ):
             elif data_check == "teacher":
                 result["teacher"].append( current_data )
                 result["answer"].append( current_answer  )
+                result["race_id"].append( data["race_id"][i] )
 
     return result
 
-def score_check( simu_data, modelList, score_years = lib.test_years, upload = False ):
+def score_check( simu_data, model_list, test_model_list, test_race_id_index_data, score_years = lib.test_years, upload = False ):
     score = 0
     count = 0
     simu_predict_data = {}
@@ -48,10 +50,16 @@ def score_check( simu_data, modelList, score_years = lib.test_years, upload = Fa
 
     c = 0
     predict_data = []
+    test_predict_data = []
 
-    for model in modelList:
-        predict_data.append( model.predict( np.array( predict_use_data ) ) )
+    for i in range( 0, len( model_list ) ):
+        predict_data.append( model_list[i].predict( np.array( predict_use_data ) ) )
 
+    for i in range( 0, len( test_model_list ) ):
+        test_predict_data.append( [] )
+        for r in range( 0, len( test_model_list[i] ) ):
+            test_predict_data[-1].append( test_model_list[i][r].predict( np.array( predict_use_data ) ) )
+            
     for race_id in simu_data.keys():
         year = race_id[0:4]
         race_place_num = race_id[4:6]        
@@ -64,7 +72,10 @@ def score_check( simu_data, modelList, score_years = lib.test_years, upload = Fa
             predict_score = 0
 
             for i in range( 0, len( predict_data ) ):
-                predict_score += predict_data[i][c]
+                if not race_id in test_race_id_index_data[i]:
+                    predict_score += predict_data[i][c]
+                else:
+                    predict_score += test_predict_data[i][test_race_id_index_data[i][race_id]][c]
 
             predict_score /= len( predict_data )
             answer_up3 = simu_data[race_id][horce_id]["answer"]["up3"]
@@ -78,15 +89,15 @@ def score_check( simu_data, modelList, score_years = lib.test_years, upload = Fa
             stand_score_list.append( check_data[i]["score"] )
             
         stand_score_list = lib.standardization( stand_score_list )
-            
+
         for i in range( 0, len( check_data ) ):
             predict_score = check_data[i]["score"]
             simu_predict_data[race_id][check_data[i]["horce_id"]] = {}
             simu_predict_data[race_id][check_data[i]["horce_id"]]["index"] = i + 1
             simu_predict_data[race_id][check_data[i]["horce_id"]]["score"] = predict_score
             simu_predict_data[race_id][check_data[i]["horce_id"]]["stand"] = stand_score_list[i]
-
-            if year in score_years and not int( race_place_num ) == 8:
+            
+            if year in score_years:
                 score += abs( predict_score - check_data[i]["answer"] )
                 count += 1            
             

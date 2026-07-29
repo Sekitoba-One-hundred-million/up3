@@ -23,8 +23,6 @@ before_diff
 before_first_passing_rank
 before_id_weight
 before_last_passing_rank
-before_popular
-before_rank
 before_speed
 best_first_passing_rank
 best_second_passing_rank
@@ -276,6 +274,7 @@ predict_netkeiba_pace
 predict_pace
 predict_pace_conv
 predict_pace_regression
+predict_race_level
 pursuing_power_ave
 pursuing_power_ave_devi
 pursuing_power_ave_index

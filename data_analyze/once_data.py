@@ -50,7 +50,7 @@ class OnceData:
         self.jockey_judgement_param_list = [ "limb", "popular", "flame_num", "dist", "kind", "baba", "place" ]
         self.trainer_judgement_param_list = [ "limb", "popular", "flame_num", "dist", "kind", "baba", "place" ]
         self.result = { "answer": [], "teacher": [], "query": [], "year": [], \
-                        "level": [], "diff": [], "horce_body": [], "category": {} }
+                        "race_id": [], "diff": [], "horce_body": [], "category": {} }
         self.data_name_read()
 
     def data_name_read( self ):
@@ -430,7 +430,7 @@ class OnceData:
             t_instance[data_name.before_first_passing_rank] = before_first_passing_rank
             t_instance[data_name.before_id_weight] = before_id_weight_score
             t_instance[data_name.before_last_passing_rank] = before_last_passing_rank
-            t_instance[data_name.before_rank] = before_rank
+            #t_instance[data_name.before_rank] = before_rank
             t_instance[data_name.dist_kind] = cd.dist_kind()
             category_data.append( data_name.dist_kind )
             t_instance[data_name.dist_kind_count] = pd.dist_kind_count()
@@ -551,7 +551,7 @@ class OnceData:
             t_instance[data_name.money] = pd.get_money()
             t_instance[data_name.popular_rank] = popular_rank
             t_instance[data_name.before_speed] = before_speed_score
-            t_instance[data_name.before_popular] = before_popular
+            #t_instance[data_name.before_popular] = before_popular
             t_instance[data_name.predict_last_passing_rank] = predict_last_passing_rank
             t_instance[data_name.predict_last_passing_rank_index] = predict_last_passing_rank_index
             t_instance[data_name.predict_last_passing_rank_stand] = predict_last_passing_rank_stand
@@ -580,9 +580,10 @@ class OnceData:
             self.simu_data[race_id][horce_id] = {}
             self.simu_data[race_id][horce_id]["data"] = t_list
             self.simu_data[race_id][horce_id]["answer"] = { "up3": up3_time,
-                                                           "odds": cd.odds(),
-                                                           "popular": cd.popular(),
-                                                           "horce_num": getHorceData.horce_num }
+                                                            "odds": cd.odds(),
+                                                            "rank": cd.rank(),
+                                                            "popular": cd.popular(),
+                                                            "horce_num": getHorceData.horce_num }
             answer_data.append( up3_time )
             teacher_data.append( t_list )
 
@@ -590,6 +591,7 @@ class OnceData:
             self.result["answer"].append( answer_data )
             self.result["teacher"].append( teacher_data )
             self.result["year"].append( year )
+            self.result["race_id"].append( race_id )
             self.result["query"].append( { "q": len( answer_data ), "year": year } )
 
         if len( self.result["category"] ) == 0:
