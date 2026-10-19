@@ -76,7 +76,7 @@ def score_check(
             predict_score = 0
 
             for i in range(0, len(predict_data)):
-                if not race_id in test_race_id_index_data[i]:
+                if len(test_race_id_index_data) == 0 or not race_id in test_race_id_index_data[i]:
                     predict_score += predict_data[i][c]
                 else:
                     predict_score += test_predict_data[i][test_race_id_index_data[i][race_id]][c]
